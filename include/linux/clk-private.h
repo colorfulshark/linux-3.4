@@ -192,5 +192,7 @@ extern struct clk_ops clk_mux_ops;
  */
 void __clk_init(struct device *dev, struct clk *clk);
 
+struct clk *__clk_register(struct device *dev, struct clk_hw *hw);
+
 #endif /* CONFIG_COMMON_CLK */
 #endif /* CLK_PRIVATE_H */
