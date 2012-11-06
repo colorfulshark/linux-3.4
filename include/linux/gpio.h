@@ -35,7 +35,7 @@ struct gpio {
 #ifdef CONFIG_GENERIC_GPIO
 #include <asm/gpio.h>
 
-#else
+#else /* ! CONFIG_GENERIC_GPIO */
 
 #include <linux/kernel.h>
 #include <linux/types.h>
@@ -172,9 +172,21 @@ static inline int irq_to_gpio(unsigned irq)
 	return -EINVAL;
 }
 
-void gpiochip_add_pin_range(struct gpio_chip *chip, const char *pinctl_name,
-		unsigned int pin_base, unsigned int npins);
-void gpiochip_remove_pin_ranges(struct gpio_chip *chip);
-#endif
+#ifdef CONFIG_PINCTRL
+
+static inline void
+gpiochip_add_pin_range(struct gpio_chip *chip, const char *pinctl_name,
+		       unsigned int pin_base, unsigned int npins)
+{
+}
+
+static inline void
+gpiochip_remove_pin_ranges(struct gpio_chip *chip)
+{
+}
+
+#endif /* CONFIG_PINCTRL */
+
+#endif /* ! CONFIG_GENERIC_GPIO */
 
 #endif /* __LINUX_GPIO_H */
