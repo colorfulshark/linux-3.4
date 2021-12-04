@@ -331,6 +331,19 @@ config ARCH_VEXPRESS
 	help
 	  This enables support for the ARM Ltd Versatile Express boards.
 
+config ARCH_SUNXI
+	bool "Allwinner Ltd. SUNXI family"
+	#select ARM_AMBA
+	select CLKSRC_MMIO
+	select GENERIC_CLOCKEVENTS
+	select HAVE_CLK
+	select NEED_MACH_MEMORY_H
+	select ARCH_HAVE_CUSTOM_GPIO_H
+	select ARCH_HAS_CPUFREQ
+	select ARCH_HAS_SG_CHAIN
+	help
+	  This enables support for systems based on sunxi soc.
+
 config ARCH_AT91
 	bool "Atmel AT91"
 	select ARCH_REQUIRE_GPIOLIB
@@ -1112,6 +1125,10 @@ source "arch/arm/mach-exynos/Kconfig"
 
 source "arch/arm/mach-shmobile/Kconfig"
 
+if ARCH_SUNXI
+source "arch/arm/mach-sunxi/Kconfig"
+endif
+
 source "arch/arm/mach-tegra/Kconfig"
 
 source "arch/arm/mach-u300/Kconfig"
@@ -1621,6 +1638,7 @@ config ARCH_NR_GPIO
 	default 1024 if ARCH_SHMOBILE || ARCH_TEGRA
 	default 355 if ARCH_U8500
 	default 264 if MACH_H4700
+	default 2048 if ARCH_SUNXI
 	default 0
 	help
 	  Maximum number of GPIOs in the system.
