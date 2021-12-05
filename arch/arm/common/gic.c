@@ -408,6 +408,14 @@ static void __cpuinit gic_cpu_init(struct gic_chip_data *gic)
 	writel_relaxed(1, base + GIC_CPU_CTRL);
 }
 
+void gic_cpu_exit(unsigned int gic_nr)
+{
+	if (gic_nr >= MAX_GIC_NR)
+		BUG();
+
+	writel(0, gic_data_cpu_base(gic_data + gic_nr) + GIC_CPU_CTRL);
+}
+
 #ifdef CONFIG_CPU_PM
 /*
  * Saves the GIC distributor registers during suspend or idle.  Must be called
