@@ -29,7 +29,9 @@
 #include <asm/suspend.h>
 #include <asm/cputype.h>
 #include <asm/hardware/gic.h>
+#ifdef CONFIG_MCPM
 #include <asm/mcpm.h>
+#endif
 #include <asm/hardware/gic.h>
 
 #include <mach/platform.h>
