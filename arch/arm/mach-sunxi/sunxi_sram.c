@@ -228,7 +228,7 @@ static int __init sram_init(void)
 		INIT_LIST_HEAD(&res->own_list);
 		gen_pool_add_virt(res->pool, res->virt_addr,
 				res->phys_addr, res->size, -1);
-		gen_pool_set_algo(res->pool, gen_pool_best_fit, NULL);
+		//gen_pool_set_algo(res->pool, gen_pool_best_fit, NULL);
 	}
 
 	return 0;
