@@ -137,6 +137,7 @@ static inline bool SUNXI_CPU_IS_WFI_MODE(unsigned int cpu)
 #define MAX_CLUSTERS		(2)
 #define MAX_CPU_IN_CLUSTER	(4)
 
+#ifdef CONFIG_SUNXI_ARISC
 static inline void sunxi_idle_cpu_die(void)
 {
 	unsigned long actlr;
@@ -210,6 +211,7 @@ static inline void sunxi_idle_cluster_die(unsigned int cluster)
 		asm("wfi" : : : "memory", "cc");
 	}
 }
+#endif
 
 /*gic check interrupt*/
 #define SGI_MASK 0xFFFF
@@ -230,6 +232,7 @@ extern raw_spinlock_t sunxi_cpu_idle_c1_lock;
 extern struct cpumask sunxi_cpu_idle_mask;
 extern struct cpumask sunxi_cpu_try_enter_idle_mask;
 
+#ifdef CONFIG_ARM_SUNXI_CPUIDLE
 /*raise software interrupt*/
 static inline void sunxi_raise_softirq(const struct cpumask *mask, unsigned int irq)
 {
@@ -266,5 +269,6 @@ static inline void sunxi_raise_softirq(const struct cpumask *mask, unsigned int 
 		}
 	}
 }
+#endif
 
 #endif
