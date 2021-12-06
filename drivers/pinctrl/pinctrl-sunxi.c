@@ -2099,12 +2099,9 @@ static int sunxi_pinctrl_probe(struct platform_device *pdev)
 	for (i = 0; i < pctl->desc->npins; i++) {
 		const struct sunxi_desc_pin *pin = pctl->desc->pins + i;
 
-		ret = gpiochip_add_pin_range(&(pctl->chip), dev_name(&pdev->dev),
+		gpiochip_add_pin_range(&(pctl->chip), dev_name(&pdev->dev),
 					     pin->pin.number,
 					     pin->pin.number, 1);
-		if (ret) {
-			goto gpiochip_error;
-		}
 	}
 		
 	/* setup sunxi pin configurations */
