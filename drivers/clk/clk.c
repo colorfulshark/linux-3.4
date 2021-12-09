@@ -1366,6 +1366,8 @@ struct clk *clk_register(struct device *dev, struct clk_hw *hw)
 
 	__clk_init(dev, clk);
 
+	return clk;
+
 fail_name:
  	kfree(clk);
 	return clk;
