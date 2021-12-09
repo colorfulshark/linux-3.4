@@ -217,6 +217,8 @@
 /* Energy Micro efm32 SoC */
 #define PORT_EFMUART   100
 
+#define PORT_SUNXI     102
+
 #ifdef __KERNEL__
 
 #include <linux/compiler.h>
