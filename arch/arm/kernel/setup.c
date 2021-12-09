@@ -55,6 +55,7 @@
 #include <asm/traps.h>
 #include <asm/unwind.h>
 #include <asm/memblock.h>
+#include <mach/sys_config.h>
 
 #if defined(CONFIG_DEPRECATED_PARAM_STRUCT)
 #include "compat.h"
@@ -970,6 +971,10 @@ void __init setup_arch(char **cmdline_p)
 		arm_pm_restart = mdesc->restart;
 
 	unflatten_device_tree();
+
+#ifdef CONFIG_ARCH_SUNXI
+	script_init();
+#endif
 
 #ifdef CONFIG_SMP
 	if (is_smp()) {
